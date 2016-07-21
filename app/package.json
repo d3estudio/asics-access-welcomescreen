@@ -1,0 +1,13 @@
+{
+  "name": "asics-welcome-screen",
+  "version": "1.0.0",
+  "description": "Welcome Screen Application",
+  "author": "João Marcos <joao@d3.do>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
