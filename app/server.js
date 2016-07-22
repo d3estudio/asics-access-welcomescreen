@@ -21,17 +21,13 @@ io.on('connection', function(socket){
 });
 
 app.get('/', function(req, res){
-  res.sendfile('index.html');
+  res.sendfile('public/index.html');
 });
 
 app.get('/post', function(req, res){
   var queryData = url.parse(req.url, true).query;
   console.log(queryData.name);
-
   io.emit('message', queryData.name);
-
-  io.sockets.emit(queryData.name);
-
   res.sendStatus(200);
 });
 
