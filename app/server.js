@@ -32,6 +32,6 @@ app.get('/post', function(req, res){
 });
 
 http.listen(PORT, function(){
-  console.log('listening on *:49160');
+  console.log('listening on *:' + PORT);
 });
 
