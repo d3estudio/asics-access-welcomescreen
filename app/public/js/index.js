@@ -1,10 +1,5 @@
 var socket = io();
 
-$(document).ready(function () {
-  // $('#content').hide();
-
-});
-
 socket.on('connected', function(socket) {
   console.log('connected');
 });
@@ -21,12 +16,18 @@ socket.on('message', function(msg){
 
   video.get(0).pause();
   video.get(0).currentTime = '0';
-  content.show();
+  content.removeClass('hide');
+  content.addClass('show');
   name.text(msg);
+  name.removeClass('hide-name');
+  name.addClass('show-name');
 
   setTimeout(function () {
+    name.removeClass('show-name');
+    name.addClass('hide-name');
     video.get(0).play();
-    content.hide();
+    content.removeClass('show');
+    content.addClass('hide');
     name.text('');
   }, 5000)
 });
