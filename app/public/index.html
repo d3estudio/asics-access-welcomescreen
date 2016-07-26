@@ -6,22 +6,29 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/jquery-3.1.0.min.js"></script>
+  <script src="js/jquery.textfill.min.js"></script>
   <script src="js/index.js"></script>
   <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
+<div id="container">
 
-<video id="video" class="asics-video" width="480" poster="./image/video-poster.jpg"
-       loop loop="loop"
-       autoplay="true" muted>
-  <source src="./image/poema-asics.mp4">
-</video>
+  <video id="video" class="asics-video" width="1920" poster="./image/video-poster.jpg"
+         loop loop="loop"
+         autoplay="true" muted>
+    <source src="./image/poema-asics.mp4">
+  </video>
 
-<div id="content">
-  <div class="welcome-message">WELCOME ASICS GUEST</div>
-  <div id="name">NAME</div>
+  <div id="content">
+    <div>
+      <div id="content-wrap">
+        <div class="welcome-message">WELCOME ASICS GUEST</div>
+        <div id="name-container"><span id="name">NAME</span></div>
+      </div>
+    </div>
+  </div>
+
 </div>
-
 </body>
 </html>

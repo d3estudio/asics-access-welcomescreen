@@ -1,7 +1,8 @@
 var socket = io();
 
 $(document).ready(function () {
-  $('#content').hide();
+  // $('#content').hide();
+
 });
 
 socket.on('connected', function(socket) {
@@ -12,6 +13,11 @@ socket.on('message', function(msg){
   var content = $('#content');
   var name = $('#name');
   var video = $('#video');
+
+  $('#name-container').textfill({
+    debug: true,
+    maxFontPixels: 1580
+  });
 
   video.get(0).pause();
   video.get(0).currentTime = '0';
