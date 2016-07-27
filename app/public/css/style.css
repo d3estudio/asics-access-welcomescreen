@@ -178,6 +178,7 @@ video {
 }
 
 #surname {
+  text-transform: uppercase;
   text-align: right;
   color: #FFFFFF;
   font-size: 90px;

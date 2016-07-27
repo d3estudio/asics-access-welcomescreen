@@ -18,7 +18,8 @@ $(function () {
 
     var splitedName = guestName.split(" ");
     var firstName = splitedName[0];
-    var secondName = splitedName[1];
+    splitedName.shift();
+    var secondName = splitedName.join(" ");
 
     name.text(firstName);
     surname.text(secondName);
