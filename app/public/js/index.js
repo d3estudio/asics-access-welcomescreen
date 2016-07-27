@@ -26,7 +26,7 @@ $(function () {
     video.get(0).pause();
     video.get(0).currentTime = '0';
 
-    // resizeText(nameContainer, guestName);
+    resizeText();
 
     showNameContainer();
 
@@ -68,9 +68,32 @@ $(function () {
 
   }
 
-  function resizeText(el, text) {
-
-
+  function resizeText() {
+    var el, elements, _i, _len, _results;
+    elements = $('#name');
+    console.log(elements);
+    if (elements.length < 0) {
+      return;
+    }
+    _results = [];
+    for (_i = 0, _len = elements.length; _i < _len; _i++) {
+      el = elements[_i];
+      _results.push((function(el) {
+        var resizeText, _results1;
+        resizeText = function() {
+          var elNewFontSize;
+          elNewFontSize = (parseInt($(el).css('font-size').slice(0, -2)) - 1) + 'px';
+          return $(el).css('font-size', elNewFontSize);
+        };
+        _results1 = [];
+        while (el.scrollWidth > el.offsetWidth) {
+          _results1.push(resizeText());
+        }
+        return _results1;
+      })(el));
+    }
+    console.log(_results)
+    return _results;
   }
 
 });
