@@ -1,72 +1,99 @@
 var socket = io();
-var nameTimeout;
+var showNameTimeout, hideContentTimeout;
 
-socket.on('connected', function(socket) {
-  console.log('connected');
-});
+$(function () {
 
-socket.on('message', function(guestName){
-  var content = $('#content');
-  var name = $('#name');
-  var welcome = $('#welcome-message');
-  var video = $('#video');
-
-  video.get(0).pause();
-  video.get(0).currentTime = '0';
-
-  clearTimeout(nameTimeout);
-
-  resizeText();
-
-  showNameContainer(guestName);
-
-  nameTimeout = setTimeout(function () {
-    name.removeClass('show-name');
-    name.addClass('hide-name');
-
-    welcome.addClass('hide-welcome');
-    welcome.removeClass('show-welcome');
-
-    video.get(0).play();
-
-    hideContent();
-
-  }, 5000)
-
-});
-
-function resizeText() {
-  $('#name-container').textfill({
-    debug: true,
-    maxFontPixels: 1580
+  socket.on('connected', function (socket) {
+    console.log('connected');
   });
-}
 
-function showNameContainer(guestName) {
-  var content = $('#content');
-  var name = $('#name');
-  var welcome = $('#welcome-message');
-  var video = $('#video');
+  socket.on('message', function (guestName) {
+    clearTimeout(showNameTimeout);
 
-  content.removeClass('hide');
-  content.addClass('show');
+    var content = $('#content');
+    var nameContainer = $('#name');
+    var surnameContainer = $('#surname');
+    var name = $('#name').text();
+    var welcome = $('#welcome-message');
+    var video = $('#video');
 
-  name.text(guestName);
-  name.removeClass('hide-name');
-  name.addClass('show-name');
+    var splitedName = guestName.split(" ");
+    var firstName = splitedName[0];
+    var secondName = splitedName[1];
 
-  welcome.removeClass('hide-welcome');
-  welcome.addClass('show-welcome');
-}
+    nameContainer.text(firstName);
+    surnameContainer.text(secondName);
 
-function hideContent() {
-  var content = $('#content');
-  var name = $('#name');
+    video.get(0).pause();
+    video.get(0).currentTime = '0';
 
-  setTimeout(function () {
-    name.text('');
-    content.removeClass('show');
-    content.addClass('hide');
-  }, 300)
+    console.log(firstName)
 
-}
+    // resizeText(nameContainer, guestName);
+
+    showNameContainer();
+
+    showNameTimeout = setTimeout(function () {
+      nameContainer.removeClass('show-name').addClass('hide-name');
+      welcome.addClass('hide-welcome').removeClass('show-welcome');
+      surnameContainer.addClass('hide-surname').removeClass('show-surname');
+
+      video.get(0).play();
+
+      // hideContent();
+
+    }, 5000)
+
+  });
+
+  function showNameContainer() {
+    var content = $('#content');
+    var name = $('#name');
+    var welcome = $('#welcome-message');
+    var video = $('#video');
+    var surnameContainer = $('#surname');
+
+    content.removeClass('hide').addClass('show');
+    name.removeClass('hide-name').addClass('show-name');
+    welcome.removeClass('hide-welcome').addClass('show-welcome');
+    surnameContainer.removeClass('hide-surname').addClass('show-surname');
+  }
+
+  function hideContent() {
+    var content = $('#content');
+    var name = $('#name');
+    clearTimeout(hideContentTimeout);
+
+    hideContentTimeout = setTimeout(function () {
+      name.text('');
+      content.removeClass('show').addClass('hide');
+    }, 300)
+
+  }
+
+  function resizeText(el, text) {
+
+    if(text==undefined)
+      text = el.html();
+    else
+      el.html(text);
+
+    var parentWidth = el.parent().width();
+    var parentHeight = el.parent().height();
+    var fontSize = 600;
+    var textWidth = el.find('span').width();
+
+    el.css('width', 'auto');
+    el.css('font-size', fontSize+'px');
+    el.css('margin-top', '6px');
+
+    while(textWidth > parentWidth){
+      fontSize--;
+      el.css('font-size', fontSize+'px');
+      el.css('margin-top', (parentHeight-fontSize)/2+'px');
+    }
+    el.css('width', parentWidth+'px');
+
+  }
+
+});

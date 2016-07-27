@@ -6,8 +6,8 @@
 
 @-webkit-keyframes leftRightIn {
   0% {
-    -webkit-transform: translateX(-1500px);
-    -moz-transform: translateX(-1500px);
+    -webkit-transform: translateX(-2000px);
+    -moz-transform: translateX(-2000px);
   }
 
   100% {
@@ -19,8 +19,8 @@
 
 @-moz-keyframes leftRightIn {
   0% {
-    -webkit-transform: translateX(-1500px);
-    -moz-transform: translateX(-1500px)
+    -webkit-transform: translateX(-2000px);
+    -moz-transform: translateX(-2000px)
   }
 
   100% {
@@ -56,7 +56,27 @@
   }
 }
 
-@-webkit-keyframes fold {
+@-webkit-keyframes foldUp {
+  0% {
+    transform: rotateX(360deg);
+  }
+
+  100% {
+    transform: rotateX(270deg);
+  }
+}
+
+@-webkit-keyframes unfoldUp {
+  0% {
+    transform: rotateX(270deg);
+  }
+
+  100% {
+    transform: rotateX(360deg);
+  }
+}
+
+@-webkit-keyframes foldDown {
   0% {
     transform: rotateX(-360deg);
   }
@@ -66,7 +86,7 @@
   }
 }
 
-@-webkit-keyframes unfold {
+@-webkit-keyframes unfoldDown {
   0% {
     transform: rotateX(-270deg);
   }
@@ -118,15 +138,18 @@ video {
   width: 1580px;
 }
 
-#name-container {
-  width: 1580px;
-  height: 100%;
-}
-
 #name {
-  font-size: 220px;
+  font-size: 420px;
+  display: block;
+  width: 1580px;
+  min-height: 50px;
   color: #3DB7E4;
   text-transform: uppercase;
+}
+
+#name span {
+  display: block;
+  width: auto;
 }
 
 .show-name {
@@ -147,11 +170,28 @@ video {
 }
 
 .show-welcome {
-  animation: unfold 200ms 500ms forwards, fold 100ms 4800ms forwards;
+  animation: unfoldDown 200ms 500ms forwards, foldDown 100ms 4800ms forwards;
   display: block;
 }
 
 .hide-welcome {
+  display: block;
+}
+
+#surname {
+  text-align: right;
+  color: #FFFFFF;
+  font-size: 90px;
+  transform: rotateX(270deg);
+  transform-origin: top;
+}
+
+.show-surname {
+  animation: unfoldUp 200ms 500ms forwards, foldUp 100ms 4800ms forwards;
+  display: block;
+}
+
+.hide-surname {
   display: block;
 }
 
