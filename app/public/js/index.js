@@ -78,7 +78,11 @@ $(function () {
         resizeText = function() {
           var elNewFontSize;
           elNewFontSize = (parseInt($(el).css('font-size').slice(0, -2)) - 1) + 'px';
-          $(el).css('line-height', elNewFontSize);
+
+          var lineHeight = parseInt(elNewFontSize);
+          lineHeight = lineHeight - lineHeight/4.5 + "px";
+
+          $(el).css('line-height', lineHeight);
           return $(el).css('font-size', elNewFontSize);
         };
         _results1 = [];
