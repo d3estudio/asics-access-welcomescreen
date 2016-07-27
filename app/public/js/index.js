@@ -2,6 +2,11 @@ var socket = io();
 var showNameTimeout, hideContentTimeout;
 
 $(function () {
+  var content = $('#content');
+  var name = $('#name');
+  var surname = $('#surname');
+  var welcome = $('#welcome-message');
+  var video = $('#video');
 
   socket.on('connected', function (socket) {
     console.log('connected');
@@ -11,12 +16,6 @@ $(function () {
     clearTimeout(showNameTimeout);
 
     guestName = guestName.replace(/[äáàâã]/g,'a').replace(/[íìî]/g,'i').replace(/[éèê]/g,'e').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u');
-
-    var content = $('#content');
-    var name = $('#name');
-    var surname = $('#surname');
-    var welcome = $('#welcome-message');
-    var video = $('#video');
 
     var splitedName = guestName.split(" ");
     var firstName = splitedName[0];
@@ -41,17 +40,11 @@ $(function () {
 
       hideContent();
 
-    }, 5000)
+    }, 9000)
 
   });
 
   function showNameContainer() {
-    var content = $('#content');
-    var name = $('#name');
-    var welcome = $('#welcome-message');
-    var video = $('#video');
-    var surname = $('#surname');
-
     content.removeClass('hide').addClass('show');
     name.removeClass('hide-name').addClass('show-name');
     welcome.removeClass('hide-welcome').addClass('show-welcome');
@@ -59,8 +52,6 @@ $(function () {
   }
 
   function hideContent() {
-    var content = $('#content');
-    var name = $('#name');
     clearTimeout(hideContentTimeout);
 
     hideContentTimeout = setTimeout(function () {

@@ -169,7 +169,7 @@ video {
 }
 
 .show-welcome {
-  animation: unfoldDown 200ms 500ms forwards, foldDown 100ms 4800ms forwards;
+  animation: unfoldDown 200ms 600ms forwards, foldDown 100ms 8800ms forwards;
   display: block;
 }
 
@@ -187,7 +187,7 @@ video {
 }
 
 .show-surname {
-  animation: unfoldUp 200ms 500ms forwards, foldUp 100ms 4800ms forwards;
+  animation: unfoldUp 200ms 600ms forwards, foldUp 100ms 8800ms forwards;
   display: block;
 }
 
