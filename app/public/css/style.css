@@ -181,7 +181,7 @@ video {
   text-transform: uppercase;
   text-align: right;
   color: #FFFFFF;
-  font-size: 90px;
+  font-size: 120px;
   transform: rotateX(270deg);
   transform-origin: top;
 }

@@ -10,6 +10,8 @@ $(function () {
   socket.on('message', function (guestName) {
     clearTimeout(showNameTimeout);
 
+    guestName = guestName.replace(/[äáàâã]/g,'a').replace(/[íìî]/g,'i').replace(/[éèê]/g,'e').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u');
+
     var content = $('#content');
     var name = $('#name');
     var surname = $('#surname');
