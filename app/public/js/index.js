@@ -26,9 +26,8 @@ $(function () {
     video.get(0).pause();
     video.get(0).currentTime = '0';
 
-    resizeText();
-
     showNameContainer();
+    resizeText();
 
     showNameTimeout = setTimeout(function () {
       name.removeClass('show-name').addClass('hide-name');
@@ -37,7 +36,7 @@ $(function () {
 
       video.get(0).play();
 
-      // hideContent();
+      hideContent();
 
     }, 5000)
 
@@ -69,20 +68,23 @@ $(function () {
   }
 
   function resizeText() {
-    var el, elements, _i, _len, _results;
-    elements = $('#name');
-    console.log(elements);
-    if (elements.length < 0) {
+    var el, element, _i, _len, _results;
+    element = $('#name');
+    element.css('font-size', '600px');
+    element.css('line-height', '600px');
+
+    if (element.length < 0) {
       return;
     }
     _results = [];
-    for (_i = 0, _len = elements.length; _i < _len; _i++) {
-      el = elements[_i];
+    for (_i = 0, _len = element.length; _i < _len; _i++) {
+      el = element[_i];
       _results.push((function(el) {
         var resizeText, _results1;
         resizeText = function() {
           var elNewFontSize;
           elNewFontSize = (parseInt($(el).css('font-size').slice(0, -2)) - 1) + 'px';
+          $(el).css('line-height', elNewFontSize);
           return $(el).css('font-size', elNewFontSize);
         };
         _results1 = [];
@@ -92,7 +94,7 @@ $(function () {
         return _results1;
       })(el));
     }
-    console.log(_results)
+
     return _results;
   }
 
