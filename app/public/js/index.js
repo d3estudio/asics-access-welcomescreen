@@ -1,5 +1,7 @@
 var socket = io();
 var showNameTimeout, hideContentTimeout;
+var nameList = new Array();
+var is_animating = false;
 
 $(function () {
   var content = $('#content');
@@ -13,6 +15,22 @@ $(function () {
   });
 
   socket.on('message', function (guestName) {
+    nameList.push(guestName);
+    nextAnimation();
+  });
+
+  function nextAnimation () {
+    if (is_animating == false && nameList.length >= 1) {
+      startAnimation(nameList.shift());
+    }
+    else {
+      clearTimeout(showNameTimeout);
+      showNameTimeout = setTimeout(hideContent, 2000);
+    }
+  }
+
+  function startAnimation (guestName) {
+    is_animating = true;
     clearTimeout(showNameTimeout);
 
     guestName = guestName.replace(/[äáàâã]/g,'a').replace(/[íìî]/g,'i').replace(/[éèê]/g,'e').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u');
@@ -31,18 +49,11 @@ $(function () {
     showNameContainer();
     resizeText();
 
-    showNameTimeout = setTimeout(function () {
-      name.removeClass('show-name').addClass('hide-name');
-      welcome.addClass('hide-welcome').removeClass('show-welcome');
-      surname.addClass('hide-surname').removeClass('show-surname');
-
-      video.get(0).play();
-
-      hideContent();
-
-    }, 9000)
-
-  });
+    var animation_time = 9000;
+    if (nameList.length >= 1) animation_time = 2000;
+    
+    showNameTimeout = setTimeout(hideContent, animation_time);
+  }
 
   function showNameContainer() {
     content.removeClass('hide').addClass('show');
@@ -52,13 +63,21 @@ $(function () {
   }
 
   function hideContent() {
-    clearTimeout(hideContentTimeout);
+    name.removeClass('show-name').addClass('hide-name');
+    welcome.addClass('hide-welcome').removeClass('show-welcome');
+    surname.addClass('hide-surname').removeClass('show-surname');
 
+    if (nameList.length == 0)
+      video.get(0).play();
+
+    clearTimeout(hideContentTimeout);
     hideContentTimeout = setTimeout(function () {
       name.text('');
       content.removeClass('show').addClass('hide');
-    }, 300)
 
+      is_animating = false;
+      nextAnimation();
+    }, 300)
   }
 
   function resizeText() {
@@ -95,5 +114,4 @@ $(function () {
 
     return _results;
   }
-
 });
