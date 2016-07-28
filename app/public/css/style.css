@@ -167,6 +167,7 @@ video {
   font-size: 80px;
   transform: rotateX(-270deg);
   transform-origin: bottom;
+  margin-bottom: -20px;
 }
 
 .show-welcome {
@@ -185,6 +186,7 @@ video {
   font-size: 120px;
   transform: rotateX(270deg);
   transform-origin: top;
+  margin-top: -20px;
 }
 
 .show-surname {
