@@ -99,6 +99,7 @@
 body {
   background-color: #000066;
   font-family: "Helvetica Bold", Arial, sans-serif;
+  cursor: none;
 }
 
 video {
